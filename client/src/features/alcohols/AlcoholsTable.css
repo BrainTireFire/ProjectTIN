@@ -1,0 +1,63 @@
+.Card.Group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+.Card {
+    width: calc(33.333% - 20px);
+    margin: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.Card.Content {
+    padding: 16px;
+}
+
+.Card.Header {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.Card.Meta {
+    color: #888;
+}
+
+.Card.Description {
+    margin-top: 10px;
+}
+
+.Card.Content.extra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.Card.Content.extra .icon.star {
+    color: yellow;
+}
+
+.Card.Content.extra .ui.buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alcohol-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.no-rating {
+    color: red;
+}

@@ -1,0 +1,9 @@
+.navbar {
+    background-color: blue;
+    color: white;
+    max-height: 45px;
+}
+
+.menu-item {
+    color: white;
+}

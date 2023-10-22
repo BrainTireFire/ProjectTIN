@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Whiskey",
+        "description": "A fine whiskey with a rich flavor.",
+        "type": "Spirits",
+        "age": 12,
+        "alcohol_percentage": 40,
+        "price": 50.99
+    },
+    {
+        "name": "Wine",
+        "description": "A red wine with a fruity taste.",
+        "type": "Wine",
+        "age": 3,
+        "alcohol_percentage": 12,
+        "price": 19.99
+    },
+    {
+        "name": "Vodka",
+        "description": "Pure and strong vodka.",
+        "type": "Spirits",
+        "age": 0,
+        "alcohol_percentage": 40,
+        "price": 29.99
+    },
+    {
+        "name": "Rum",
+        "description": "Dark and delicious rum.",
+        "type": "Spirits",
+        "age": 5,
+        "alcohol_percentage": 42,
+        "price": 34.99
+    },
+    {
+        "name": "Tequila",
+        "description": "A classic tequila for margaritas.",
+        "type": "Spirits",
+        "age": 2,
+        "alcohol_percentage": 38,
+        "price": 27.99
+    }
+]

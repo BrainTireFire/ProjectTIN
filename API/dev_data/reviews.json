@@ -1,0 +1,22 @@
+[
+    {
+        "rating": 5,
+        "comment": "Excellent whiskey!"
+    },
+    {
+        "rating": 4,
+        "comment": "Good wine."
+    },
+    {
+        "rating": 3,
+        "comment": "Average vodka."
+    },
+    {
+        "rating": 5,
+        "comment": "Amazing rum!"
+    },
+    {
+        "rating": 2,
+        "comment": "Not so great tequila."
+    }
+]

@@ -1,0 +1,55 @@
+.registration-container {
+    max-width: 500px;
+    margin: 100px auto 0;
+}
+
+.forgot-password-link-container,
+.create-account-text {
+    max-width: 500px;
+    margin: 15px auto 0;
+}
+
+
+.ui.form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Transparent background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ui.form header {
+    text-align: center;
+}
+
+.ui.form label {
+    font-weight: bold;
+}
+
+.ui.form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ui.form .ui.label.basic.red {
+    margin-top: 5px;
+}
+
+.ui.form button {
+    margin-top: 10px;
+}
+
+.create-account-link {
+    color: teal;
+    text-decoration: none;
+}
+
+.create-account-link:hover {
+    text-decoration: underline;
+}
