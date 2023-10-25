@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.use(accountController.protect);
 
+router.get('/me', userController.getCurrentUser, userController.getUser)
+
 router
     .patch('/updateCurrentUser', userController.updateCurrentUser);
 router

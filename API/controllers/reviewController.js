@@ -57,7 +57,28 @@ exports.updateReview = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteReview = catchAsync(async (req, res, next) => {
-    await Review.findByIdAndRemove(req.params.id);
+    const reviewId = req.params.id;
+    const deletedReview = await Review.findByIdAndDelete(reviewId);
 
-    res.status(204).json();
+    if (!deletedReview) {
+        return next(new ErrorHandler('Review not found', 404));
+    }
+
+    const alcoholReview = await AlcoholReview.findOne({ review: reviewId });
+    if (alcoholReview) {
+        const alcoholId = alcoholReview.alcohol;
+        const alcohol = await Alcohol.findById(alcoholId);
+
+        if (alcohol) {
+            const index = alcohol.alcoholReviews.indexOf(alcoholReview._id);
+            if (index !== -1) {
+                alcohol.alcoholReviews.splice(index, 1);
+                await alcohol.save();
+            }
+        }
+
+        await AlcoholReview.findByIdAndDelete(alcoholReview._id);
+    }
+
+    res.status(204).end();
 });

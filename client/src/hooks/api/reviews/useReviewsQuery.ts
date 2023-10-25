@@ -8,7 +8,6 @@ type Response = {
 
 async function getReviews(): Promise<Response[]> {
     const response = await apiClient.get<Response[]>('/reviews');
-    console.log(response)
     return response.data;
 }
 

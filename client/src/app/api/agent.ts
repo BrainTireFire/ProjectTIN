@@ -10,10 +10,11 @@ const DEFAULT_SETTINGS = {
 export const apiClient = axios.create(DEFAULT_SETTINGS);
 export const authClient = axios.create(DEFAULT_SETTINGS);
 
-function getResponseToken<T>(response: AxiosResponse<T>): void {
+function getResponseToken<T>(response: AxiosResponse<T>): Promise<AxiosResponse<T>> {
     console.log(response.data)
     // @ts-ignore
     localStorage.setItem('jwt', response.data.token)
+    return Promise.resolve(response);
 }
 
 async function setRequestToken(request: AxiosRequestConfig): Promise<AxiosRequestConfig> {
@@ -37,25 +38,25 @@ apiClient.interceptors.request.use(setRequestToken);
 // @ts-ignore
 authClient.interceptors.response.use(getResponseToken)
 
-apiClient.interceptors.response.use(undefined, handleResponseError);
 authClient.interceptors.response.use(undefined, handleResponseError);
+apiClient.interceptors.response.use(undefined, handleResponseError);
 
-const responseBody = <T>(response: AxiosResponse<T>) => response;
+// const responseBody = <T>(response: AxiosResponse<T>) => response;
 
-const requestsAuth = {
-    get: <T>(url: string) => authClient.get<T>(url).then(responseBody),
-    post: <T>(url: string, body: {}) => authClient.post<T>(url, body).then(responseBody),
-}
+// const requestsAuth = {
+//     get: <T>(url: string) => authClient.get<T>(url).then(responseBody),
+//     post: <T>(url: string, body: {}) => authClient.post<T>(url, body).then(responseBody),
+// }
 
-const Account = {
-    current: () => requestsAuth.get<User>('/account'), // ERROR
-    login: (user: UserFormValues) => requestsAuth.post<User>('/login', user),
-    register: (user: UserRegisterFormValues) => requestsAuth.post<User>('/register', user),
-    forgotPassword: (user: UserForgetPasswordFormValues) => requestsAuth.post<User>('/forgetPassword', user)
-}
+// const Account = {
+//     current: () => requestsAuth.get<User>('/account'), // ERROR
+//     login: (user: UserFormValues) => requestsAuth.post<User>('/login', user),
+//     register: (user: UserRegisterFormValues) => requestsAuth.post<User>('/register', user),
+//     forgotPassword: (user: UserForgetPasswordFormValues) => requestsAuth.post<User>('/forgetPassword', user)
+// }
 
-const agent = {
-    Account
-}
+// const agent = {
+//     Account
+// }
 
-export default agent;
+// export default agent;

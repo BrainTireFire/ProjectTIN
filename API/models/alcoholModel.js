@@ -14,6 +14,9 @@ const alcoholSchema = new mongoose.Schema({
         trim: true,
         maxlength: [800, 'An alcohol description must have less then 800 characters'],
     },
+    image: {
+        type: String
+    },
     type: {
         type: String,
         required: true,

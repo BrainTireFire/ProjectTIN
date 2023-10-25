@@ -5,16 +5,15 @@ const accountController = require('./../controllers/accountController');
 const router = express.Router();
 
 router.use(accountController.protect);
-router.use(accountController.restrictTo('admin', 'moderator'));
 
 router
     .route('/')
-    .get(alcoholController.getAllAlcohols)
-    .post(alcoholController.createAlcohol);
+    .get(accountController.restrictTo('admin', 'moderator', 'user'), alcoholController.getAllAlcohols)
+    .post(accountController.restrictTo('admin', 'moderator'), alcoholController.createAlcohol);
 router
     .route('/:id')
-    .get(alcoholController.getAlcohol)
-    .patch(alcoholController.updateAlcohol)
-    .delete(alcoholController.deleteAlcohol);
+    .get(accountController.restrictTo('admin', 'moderator', 'user'), alcoholController.getAlcohol)
+    .patch(accountController.restrictTo('admin', 'moderator', 'user'), alcoholController.updateAlcohol)
+    .delete(accountController.restrictTo('admin'), alcoholController.deleteAlcohol);
 
 module.exports = router;

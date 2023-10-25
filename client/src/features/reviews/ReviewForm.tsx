@@ -6,6 +6,7 @@ import './ReviewForm.css';
 import { useAddReviewWithAlcoholMutation } from '../../hooks/api/reviews/userAddReviewsAlcoholDataMutation';
 import { router } from '../../app/router/Routes';
 import { useParams } from 'react-router-dom';
+import { useAlcoholDetailsQuery } from '../../hooks/api/alcohols/useAlcoholDetailsQuery';
 
 const validationSchema = Yup.object().shape({
     rating: Yup.number()
@@ -18,18 +19,24 @@ const validationSchema = Yup.object().shape({
 
 export default function ReviewForm() {
     const { id } = useParams<{ id: string }>();
+    const ids = id?.split('and');
     const addReviewWithAlcohol = useAddReviewWithAlcoholMutation();
 
     const handleAddReviewAlcoholSubmit = async (values) => {
+        if (!ids || !Array.isArray(ids) || ids.length < 2) {
+            console.error('Error: Invalid ids');
+            return;
+        }
         try {
             const { rating, comment } = values;
             const data = {
                 rating,
                 comment,
-                alcoholId: id
+                alcoholId: ids[0],
+                user: ids[1]
             };
             addReviewWithAlcohol.mutate(data);
-            router.navigate(`/reviewDetails/${id}`);
+            router.navigate(`/reviewDetails/${ids[0]}and${ids[1]}`);
             window.location.reload();
         } catch (error) {
             console.log(error);
@@ -62,7 +69,7 @@ export default function ReviewForm() {
                     </SemanticForm.Field>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Button positive content='Login' type='submit' fluid />
+                        <Button positive content='Create review' type='submit' fluid />
                     </div>
                 </Form>
             </Formik>

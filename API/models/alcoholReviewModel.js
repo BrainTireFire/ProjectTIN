@@ -12,6 +12,9 @@ const alcoholReviewSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         require: [true, "Missing data"]
+    },
+    comments: {
+        type: String
     }
 });
 

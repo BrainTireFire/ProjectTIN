@@ -1,30 +1,24 @@
 import { Container } from 'semantic-ui-react';
 import Navbar from './NavBar';
-import { Outlet, useLocation } from 'react-router-dom';
-import AgeVerificationPage from '../../features/home/AgeVerificationPage';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useCurrentUser } from '../../hooks/api/users/useCurrentUser';
+import { useEffect, useState } from 'react';
 
 export default function App() {
-  // const { commonStore, userStore } = useStore();
-
-  const location = useLocation();
-
-  // useEffect(() => {
-  //   if (commonStore.token) {
-  //     userStore.getUser().finally(() => commonStore.setAppLoaded());
-  //   } else {
-  //     commonStore.setAppLoaded();
-  //   }
-  // }, [commonStore, userStore])
-
-  // if (!commonStore.appLoaded) return <LoadingComponent content='Loading app...' />
-
+  const jwtToken = localStorage.getItem('jwt');
 
   return (
-    <>
-      <Navbar />
-      <Container>
-        <Outlet />
-      </Container>
-    </>
-  )
+    <div>
+      {jwtToken ? (
+        <>
+          <Navbar />
+          <Container>
+            <Outlet />
+          </Container>
+        </>
+      ) : (
+        <Navigate to={"/home"} />
+      )}
+    </div>
+  );
 };

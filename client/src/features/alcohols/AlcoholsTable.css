@@ -61,3 +61,19 @@
 .no-rating {
     color: red;
 }
+
+.pagination_Container_Style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-Button-Style {
+    margin: 0 10px;
+}
+
+.pagination-select-list {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 20px;
+}

@@ -46,12 +46,20 @@ exports.deleteCurrentUser = catchAsync(async (req, res, next) => {
     res.status(204).json();
 });
 
-exports.getUser = (req, res, next) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route not yet defined'
-    });
+exports.getCurrentUser = (req, res, next) => {
+    req.params.id = req.user.id;
+    next();
 };
+
+exports.getUser = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+        return next(new ErrorHandler('User not found', 404));
+    }
+
+    res.status(200).json(user);
+});
 
 exports.createUser = (req, res, next) => {
     res.status(500).json({

@@ -1,42 +1,182 @@
 [
     {
-        "name": "Whiskey",
-        "description": "A fine whiskey with a rich flavor.",
-        "type": "Spirits",
+        "name": "Suntory Whisky",
+        "description": "Suntory Whisky is a renowned Japanese whisky known for its smooth and mellow flavor.",
+        "image": "/image/hibiki-harmony.jpg",
+        "type": "Whiskey",
         "age": 12,
         "alcohol_percentage": 40,
-        "price": 50.99
+        "price": 50,
+        "alcoholReviews": []
     },
     {
-        "name": "Wine",
-        "description": "A red wine with a fruity taste.",
+        "name": "Vodka Elegance",
+        "description": "Elegance Vodka is a premium Russian vodka crafted with pure spring water and distilled multiple times.",
+        "image": "/image/vodka-elegance.jpg",
+        "type": "Vodka",
+        "age": 8,
+        "alcohol_percentage": 40,
+        "price": 30,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Caribbean Rum",
+        "description": "Caribbean Rum is a tropical delight with flavors of coconut and pineapple.",
+        "image": "/image/Caribbean-rum.png",
+        "type": "Rum",
+        "age": 5,
+        "alcohol_percentage": 45,
+        "price": 40,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Gin Blossom",
+        "description": "Gin Blossom is a classic London dry gin with botanical notes and a crisp finish.",
+        "image": "/image/Gin_Blossom.jpg",
+        "type": "Gin",
+        "age": 3,
+        "alcohol_percentage": 42,
+        "price": 35,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Tequila Sunrise",
+        "description": "Tequila Sunrise is a Mexican tequila with a fruity twist, perfect for cocktails.",
+        "image": "/image/Tequila_Sunrise.png",
+        "type": "Tequila",
+        "age": 4,
+        "alcohol_percentage": 38,
+        "price": 45,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Brandy Excellence",
+        "description": "Excellence Brandy is a rich and aged brandy with notes of oak and caramel.",
+        "image": "/image/Brandy_Excellence.jpg",
+        "type": "Brandy",
+        "age": 10,
+        "alcohol_percentage": 36,
+        "price": 60,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Red Wine Blend",
+        "description": "Red Wine Blend is a smooth and fruity wine, perfect for pairing with hearty meals.",
+        "image": "/image/Red_Wine_Blend.webp",
+        "type": "Wine",
+        "age": 2,
+        "alcohol_percentage": 14,
+        "price": 25,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Craft Beer IPA",
+        "description": "Craft Beer IPA is a hoppy and aromatic beer, beloved by beer enthusiasts.",
+        "image": "/image/Craft_Beer _PA.webp",
+        "type": "Beer",
+        "age": 1,
+        "alcohol_percentage": 6,
+        "price": 8,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Apple Cider",
+        "description": "Apple Cider is a refreshing and crisp cider, perfect for a sunny day.",
+        "image": "/image/bottle-apple.png",
+        "type": "Cider",
+        "age": 0.5,
+        "alcohol_percentage": 5,
+        "price": 12,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Japanese Sake",
+        "description": "Japanese Sake is a traditional rice wine, known for its delicate and subtle flavors.",
+        "image": "/image/japanese-sake.webp",
+        "type": "Sake",
+        "age": 2,
+        "alcohol_percentage": 16,
+        "price": 18,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Chardonnay",
+        "description": "Chardonnay is a crisp and oaky white wine with notes of citrus and vanilla.",
+        "image": "/image/chardonnay.jpg",
         "type": "Wine",
         "age": 3,
-        "alcohol_percentage": 12,
-        "price": 19.99
+        "alcohol_percentage": 13,
+        "price": 22,
+        "alcoholReviews": []
     },
     {
-        "name": "Vodka",
-        "description": "Pure and strong vodka.",
-        "type": "Spirits",
-        "age": 0,
-        "alcohol_percentage": 40,
-        "price": 29.99
+        "name": "Craft Lager",
+        "description": "Craft Lager is a clean and refreshing beer with a light and malty profile.",
+        "image": "/image/Craft-Lage.webp",
+        "type": "Beer",
+        "age": 0.5,
+        "alcohol_percentage": 5,
+        "price": 10,
+        "alcoholReviews": []
     },
     {
-        "name": "Rum",
-        "description": "Dark and delicious rum.",
-        "type": "Spirits",
+        "name": "Champagne Celebration",
+        "description": "Champagne Celebration is a sparkling wine perfect for toasting to special occasions.",
+        "image": "/image/celebrations_in_champagnefles.jpg",
+        "type": "Wine",
         "age": 5,
-        "alcohol_percentage": 42,
-        "price": 34.99
+        "alcohol_percentage": 12,
+        "price": 35,
+        "alcoholReviews": []
     },
     {
-        "name": "Tequila",
-        "description": "A classic tequila for margaritas.",
-        "type": "Spirits",
+        "name": "Craft Stout",
+        "description": "Craft Stout is a dark and robust beer with flavors of coffee and chocolate.",
+        "image": "/image/craft-stout.png",
+        "type": "Beer",
+        "age": 0.75,
+        "alcohol_percentage": 7,
+        "price": 12,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Pear Cider",
+        "description": "Pear Cider is a fruity and aromatic cider made from ripe pears.",
+        "image": "/image/Pear_Cider.png",
+        "type": "Cider",
+        "age": 0.75,
+        "alcohol_percentage": 6,
+        "price": 14,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Golden Rum",
+        "description": "Golden Rum is a smooth and golden rum with a hint of vanilla and caramel.",
+        "image": "/image/RUM-GOLDEN.jpeg",
+        "type": "Rum",
+        "age": 6,
+        "alcohol_percentage": 40,
+        "price": 38,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Classic Gin",
+        "description": "Classic Gin is a traditional gin with juniper and citrus notes, perfect for cocktails.",
+        "image": "/image/classic-gin.jpg",
+        "type": "Gin",
+        "age": 2,
+        "alcohol_percentage": 40,
+        "price": 28,
+        "alcoholReviews": []
+    },
+    {
+        "name": "Agave Tequila",
+        "description": "Agave Tequila is a tequila made from 100% blue agave, known for its purity and taste.",
+        "image": "/image/Agave_Tequila.jpg",
+        "type": "Tequila",
         "age": 2,
         "alcohol_percentage": 38,
-        "price": 27.99
+        "price": 42,
+        "alcoholReviews": []
     }
 ]

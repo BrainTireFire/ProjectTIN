@@ -13,7 +13,7 @@ import ResetPasswordForm from "../../features/account/ResetPassword";
 import NotFound from "../../features/errors/NotFound";
 import ReviewDetails from "../../features/reviews/ReviewDetails";
 import ReviewForm from "../../features/reviews/ReviewForm";
-import ErrorPage from "../../features/errors/ErrorPage";
+import AlcoholForm from "../../features/alcohols/AlcoholForm";
 
 export const publicRoutes: RouteObject[] = [
     { path: 'login', element: <LoginForm /> },
@@ -31,6 +31,7 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             { path: 'alcohols', element: <AlcoholsTable /> },
+            { path: 'alcoholAdd', element: <AlcoholForm /> },
             { path: 'alcohols/:id', element: <AlcoholDetails /> },
             { path: 'reviews', element: <ReviewDashboard /> },
             { path: 'reviewDetails/:id', element: <ReviewDetails /> },

@@ -1,0 +1,56 @@
+[
+    {
+        "role": "user",
+        "name": "Bob",
+        "email": "bob@test.com",
+        "active": true,
+        "password": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "passwordConfirm": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "reviews": []
+    },
+    {
+        "role": "admin",
+        "name": "admin",
+        "active": true,
+        "email": "admin@test.com",
+        "password": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "passwordConfirm": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "reviews": []
+    },
+    {
+        "role": "moderator",
+        "name": "Panam",
+        "email": "panam@test.com",
+        "password": "$2a$12$5mbyLvI2V0aP5mRzYJ0BMuSzYHMDdZS.s7oUMyVM7JkKtvrtbbcOS",
+        "passwordConfirm": "$2a$12$5mbyLvI2V0aP5mRzYJ0BMuSzYHMDdZS.s7oUMyVM7JkKtvrtbbcOS",
+        "active": true,
+        "reviews": []
+    },
+    {
+        "role": "user",
+        "active": true,
+        "name": "June",
+        "email": "june@test.com",
+        "password": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "passwordConfirm": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "reviews": []
+    },
+    {
+        "role": "user",
+        "active": true,
+        "name": "Tomek",
+        "email": "tomek@test.com",
+        "password": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "passwordConfirm": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "reviews": []
+    },
+    {
+        "role": "user",
+        "active": true,
+        "name": "Paul",
+        "email": "paul@test.com",
+        "password": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "passwordConfirm": "$2a$12$dblccfKf9vovMkjSTYIK4.6izRufBHOYlVgCYDoxbYK5Og20nKUbi",
+        "reviews": []
+    }
+]

@@ -17,9 +17,6 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate: [validator.isEmail, 'Please provide a valid email']
     },
-    photo: {
-        type: String
-    },
     role: {
         type: String,
         required: true,
@@ -61,7 +58,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
-    }
+    },
+    reviews: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserReviews'
+    }],
 });
 
 userSchema.pre('save', async function (next) {

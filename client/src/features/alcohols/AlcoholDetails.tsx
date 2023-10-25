@@ -1,4 +1,4 @@
-import { Card } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom'; // Import Link from react-router-dom
 import LoadingComponent from '../../app/layout/LoadingComponent';
 import { useAlcoholDetailsQuery } from '../../hooks/api/alcohols/useAlcoholDetailsQuery';
@@ -18,6 +18,7 @@ export default function AlcoholsDetails() {
                 <Card.Content>
                     <Card.Header>{alcoholQuery.data?.name}</Card.Header>
                     <Card.Meta>Type: {alcoholQuery.data?.type}</Card.Meta>
+                    <Image src={alcoholQuery.data?.image} alt={alcoholQuery.data?.name} className="alcohol-image" style={{ width: '400px', height: '500px' }} />
                     <Card.Description>{alcoholQuery.data?.description}</Card.Description>
                 </Card.Content>
             </Card>

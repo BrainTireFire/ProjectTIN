@@ -1,7 +1,10 @@
 const Alcohol = require('../models/alcoholModel');
+const Review = require('../models/reviewModel');
+const AlcoholReview = require('../models/alcoholReviewModel');
 const ErrorHandler = require('../utilities/errorHandler');
 const APIExtensions = require('./..//utilities/apiExtensions');
 const catchAsync = require('./..//utilities/catchAsync');
+const { createReview } = require('./reviewController');
 
 
 exports.getAllAlcohols = catchAsync(async (req, res, next) => {
@@ -36,6 +39,10 @@ exports.getAlcohol = catchAsync(async (req, res, next) => {
         populate: {
             path: 'review',
             select: 'rating comment',
+            populate: {
+                path: 'user',
+                select: '_id',
+            }
         }
     });
 
@@ -68,6 +75,12 @@ exports.updateAlcohol = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteAlcohol = catchAsync(async (req, res, next) => {
+    const alcoholReviews = await AlcoholReview.find({ alcohol: req.params.id });
+    alcoholReviews.forEach(async (alcoholReview) => {
+        await Review.findByIdAndRemove(alcoholReview.review);
+        await AlcoholReview.findByIdAndRemove(alcoholReview._id);
+    });
+
     const alcohol = await Alcohol.findByIdAndRemove(req.params.id);
 
     if (!alcohol) {

@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import * as Yup from 'yup';
-import { Button, Header, Label, Form as SemanticForm } from "semantic-ui-react";
+import { Button, Header, Label, Form as SemanticForm, Icon } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import './RegisterForm.css';
 import { Link } from "react-router-dom";
@@ -32,6 +32,9 @@ export default function LoginForm() {
 
     return (
         <div className="registration-container">
+            <Header as="h1" color="teal" textAlign="center">
+                <Icon name='glass martini' className="icon-login" />
+            </Header>
             <Header as="h2" color="teal" textAlign="center">
                 Create an account on alcohol world
             </Header>

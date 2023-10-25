@@ -22,6 +22,7 @@ const createSendToken = (user, statusCode, res) => {
     if (process.env.NODE_ENV === 'production') {
         cookieOptions.secure = true;
     }
+
     res.cookie('jwt', token, cookieOptions);
 
     user.password = undefined;
@@ -95,27 +96,42 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedIn = async (req, res, next) => {
-    console.log(req.cookies)
+    let token;
     if (req.cookies.jwt) {
         try {
-            // 1) verify token
             const decoded = await promisify(jwt.verify)(
                 req.cookies.jwt,
                 process.env.JWT_SECRET
             );
 
-            // 2) Check if user still exists
             const currentUser = await User.findById(decoded.id);
             if (!currentUser) {
                 return next();
             }
 
-            // 3) Check if user changed password after the token was issued
             if (currentUser.changedPasswordAfter(decoded.iat)) {
                 return next();
             }
 
-            // THERE IS A LOGGED IN USER
+            res.locals.user = currentUser;
+            return next();
+        } catch (err) {
+            return next();
+        }
+    } else if (req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')) {
+        try {
+            token = req.headers.authorization.split(' ')[1];
+
+            const currentUser = await User.findById(decoded.id);
+            if (!currentUser) {
+                return next();
+            }
+
+            if (currentUser.changedPasswordAfter(decoded.iat)) {
+                return next();
+            }
+
             res.locals.user = currentUser;
             return next();
         } catch (err) {
@@ -124,21 +140,6 @@ exports.isLoggedIn = async (req, res, next) => {
     }
     next();
 };
-
-exports.getCurrentUser = catchAsync(async (req, res, next) => {
-    const user = await User.findById(req.user.id);
-
-    if (!user) {
-        return next(new ErrorHandler('User not found', 404));
-    }
-
-    res.status(200).json({
-        status: 'success',
-        data: {
-            user
-        }
-    });
-});
 
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {

@@ -7,16 +7,17 @@ type Response = {
     alcohols: Alcohol[]
 }
 
-async function getAlcohols(): Promise<Alcohol[]> {
-    const response = await apiClient.get<Alcohol[]>('/alcohols');
+async function getAlcohols(page, limit): Promise<Alcohol[]> {
+    const response = await apiClient.get<Alcohol[]>(`/alcohols?page=${page}&limit=${limit}`);
     return response.data;
 }
 
 
-export function useAlcoholsQuery() {
+export function useAlcoholsQuery(page, limit) {
     return useQuery({
-        queryKey: ['alcohols'],
-        queryFn: getAlcohols
+        queryKey: ['alcohols', page, limit],
+        queryFn: () => getAlcohols(page, limit),
+        //keepPreviousData : true
     })
 }
 

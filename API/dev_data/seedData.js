@@ -2,6 +2,7 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Alcohol = require('../models/alcoholModel');
+const User = require('../models/userModel');
 const Review = require('../models/reviewModel');
 const AlcoholReview = require('../models/alcoholReviewModel');
 
@@ -21,6 +22,7 @@ mongoose.connect(ConnectionString, {
 //Read JSON FILES
 const alcohols = JSON.parse(fs.readFileSync(`${__dirname}/alcohols.json`, 'utf-8'));
 const reviews = JSON.parse(fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 
 //Import data
 const importData = async () => {
@@ -28,8 +30,18 @@ const importData = async () => {
         const createdAlcohols = await Alcohol.create(alcohols);
         const alcoholIds = createdAlcohols.map((alcohol) => alcohol._id);
 
-        const createdReviews = await Review.create(reviews);
+        const createdUsers = await User.create(users);
+        const userIds = createdUsers.map((user) => user._id);
+
+        const reviewsWithRandomUserIds = reviews.map((review) => {
+            const randomUserId = userIds[Math.floor(Math.random() * userIds.length)];
+            review.user = randomUserId;
+            return review;
+        });
+
+        const createdReviews = await Review.create(reviewsWithRandomUserIds);
         const reviewIds = createdReviews.map((review) => review._id);
+
 
         for (const alcoholId of alcoholIds) {
             const randomReviewId = reviewIds[Math.floor(Math.random() * reviewIds.length)];
@@ -38,9 +50,25 @@ const importData = async () => {
                 alcohol: alcoholId,
                 review: randomReviewId,
                 timestamp: new Date(),
+                comment: 'testowy komentarz'
             });
 
             await alcoholReview.save();
+        }
+
+
+        for (const userId of userIds) {
+            const reviewsObject = await Review.findOne({ user: userId });
+            if (reviewsObject) {
+                await User.updateOne({ _id: userId }, { $push: { reviews: reviewsObject._id } });
+            }
+        }
+
+        for (const alcoholId of alcoholIds) {
+            const alcoholReviewsObject = await AlcoholReview.findOne({ alcohol: alcoholId });
+            if (alcoholReviewsObject) {
+                await Alcohol.updateOne({ _id: alcoholId }, { $push: { alcoholReviews: alcoholReviewsObject._id } });
+            }
         }
 
         console.log("Data successfully added!!!");
@@ -56,6 +84,7 @@ const deleteData = async () => {
         await Alcohol.deleteMany();
         await Review.deleteMany();
         await AlcoholReview.deleteMany();
+        await User.deleteMany();
 
         console.log("Data successfully deleted!!!");
         process.exit();

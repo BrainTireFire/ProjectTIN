@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
-import { Button, Header, Form as SemanticForm } from "semantic-ui-react";
+import { Button, Header, Form as SemanticForm, Icon } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import './LoginForm.css';
 import { UserForgetPasswordFormValues } from "../../app/models/user";
@@ -27,6 +27,9 @@ export default function ForgetPasswordForm() {
     }
     return (
         <div className="login-container">
+            <Header as="h1" color="teal" textAlign="center">
+                <Icon name='glass martini' className="icon-login" />
+            </Header>
             <Header as="h2" color="teal" textAlign="center">
                 Forget password to the alcohol world?
             </Header>

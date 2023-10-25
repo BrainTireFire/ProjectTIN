@@ -1,12 +1,16 @@
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
-import { Button, Header, Form as SemanticForm } from "semantic-ui-react";
+import { Button, Header, Form as SemanticForm, Message, Icon } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import './LoginForm.css';
 import { Link } from "react-router-dom";
 import { useLoginMutation } from "../../hooks/api/accounts/useLoginMutation";
 import { UserFormValues } from "../../app/models/user";
 import { router } from "../../app/router/Routes";
+import ErrorPage from "../errors/ErrorPage";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useCurrentUser } from "../../hooks/api/users/useCurrentUser";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -19,32 +23,41 @@ const validationSchema = Yup.object().shape({
 
 export default function LoginForm() {
     const loginMutation = useLoginMutation();
+    const [errorLogin, setErrorLogin] = useState(false);
 
     const handleLoginSubmit = async (values: UserFormValues) => {
         try {
-            loginMutation.mutate(values);
-            router.navigate('/alcohols');
-            // if (loginMutation.isSuccess) {
-            //     router.navigate('/alcohols');
-            // }
+            const response = await loginMutation.mutateAsync(values);
+
+            if (response) {
+                router.navigate('/alcohols');
+            }
+
+            setErrorLogin(false);
 
         } catch (error) {
-            console.log(error);
-            // Handle login error
+            console.error('Error in handleLoginSubmit:', error);
+            setErrorLogin(true);
         }
     }
 
     return (
         <div className="login-container">
+            <Header as="h1" color="teal" textAlign="center">
+                <Icon name='glass martini' className="icon-login" />
+            </Header>
             <Header as="h2" color="teal" textAlign="center">
                 Sign in to alcohol world
             </Header>
+            {errorLogin ? (
+                <Message negative>
+                    <Message.Header>Unauthorized</Message.Header>
+                    <p>Incorrect email or password</p>
+                </Message>
+            ) : null}
             <Formik
                 initialValues={{ email: '', password: '', error: null }}
                 validationSchema={validationSchema}
-                // onSubmit={(values, { setErrors }) =>
-                //     userStore.login(values).catch(error => setErrors({ error: 'Invalid email or password' }))
-                // }
                 onSubmit={handleLoginSubmit}
             >
                 <Form className='ui form' autoComplete='off'>
