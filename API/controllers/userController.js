@@ -1,83 +1,109 @@
 const User = require('../models/userModel');
 const catchAsync = require('./..//utilities/catchAsync');
-const ErrorHandler = require('./../utilities/ErrorHandler')
+const ErrorHandler = require('./../utilities/ErrorHandler');
 
 const filterObj = (obj, ...allowedFields) => {
-    let newObj = {};
-    Object.keys(obj).forEach(el => {
-        if (allowedFields.includes(el)) {
-            newObj[el] = obj[el];
-        }
-    });
-    return newObj;
+  let newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) {
+      newObj[el] = obj[el];
+    }
+  });
+  return newObj;
 };
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
-    const users = await User.find();
+  const users = await User.find();
 
-    res.status(200).json({
-        users
-    });
+  res.status(200).json({
+    users,
+  });
 });
 
 exports.updateCurrentUser = catchAsync(async (req, res, next) => {
-    if (req.body.password || req.body.passwordConfirm) {
-        return next(new ErrorHandler('You can not changed password here! Please use updatePassword', 400));
-    }
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new ErrorHandler(
+        'You can not changed password here! Please use updatePassword',
+        400,
+      ),
+    );
+  }
 
-    const filderBodyData = filterObj(req.body, 'name', 'email');
-    const updatedUser = await User.findByIdAndUpdate(req.user.id, filderBodyData, {
-        new: true,
-        runValidators: true
-    });
+  const filderBodyData = filterObj(req.body, 'name', 'email');
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    filderBodyData,
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
 
-    res.status(200).json({
-        user: updatedUser
-    });
+  res.status(200).json({
+    user: updatedUser,
+  });
 });
 
 exports.deleteCurrentUser = catchAsync(async (req, res, next) => {
-    if (req.body.password || req.body.passwordConfirm) {
-        return next(new ErrorHandler('You can not changed password here! Please use updatePassword', 400));
-    }
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new ErrorHandler(
+        'You can not changed password here! Please use updatePassword',
+        400,
+      ),
+    );
+  }
 
-    const user = await User.findByIdAndUpdate(req.user.id, { active: false });
+  const user = await User.findByIdAndUpdate(req.user.id, { active: false });
 
-    res.status(204).json();
+  res.status(204).json();
 });
 
 exports.getCurrentUser = (req, res, next) => {
-    req.params.id = req.user.id;
-    next();
+  req.params.id = req.user.id;
+  next();
 };
 
 exports.getUser = catchAsync(async (req, res, next) => {
-    const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id);
 
-    if (!user) {
-        return next(new ErrorHandler('User not found', 404));
-    }
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
 
-    res.status(200).json(user);
+  res.status(200).json(user);
 });
 
 exports.createUser = (req, res, next) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route not yet defined'
-    });
+  res.status(500).json({
+    status: 'error',
+    message: 'This route not yet defined',
+  });
 };
 
-exports.updateUser = (req, res, next) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route not yet defined'
-    });
-};
+exports.updateUser = catchAsync(async (req, res, next) => {
+  const filderBodyData = filterObj(req.body, 'name', 'email', 'role');
+  const updatedUser = await User.findByIdAndUpdate(
+    req.params.id,
+    filderBodyData,
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
 
-exports.deleteUser = (req, res, next) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route not yet defined'
-    });
-};
+  res.status(200).json({
+    user: updatedUser,
+  });
+});
+
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndRemove(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler('No user found with that ID', 404));
+  }
+
+  res.status(204).json();
+});

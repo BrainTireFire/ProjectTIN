@@ -14,32 +14,34 @@ import NotFound from "../../features/errors/NotFound";
 import ReviewDetails from "../../features/reviews/ReviewDetails";
 import ReviewForm from "../../features/reviews/ReviewForm";
 import AlcoholForm from "../../features/alcohols/AlcoholForm";
+import AdminDashboard from "../../features/admin/AdminDashboard";
 
 export const publicRoutes: RouteObject[] = [
-    { path: 'login', element: <LoginForm /> },
-    { path: 'register', element: <RegisterForm /> },
-    { path: 'forgotPassword', element: <ForgetPasswordForm /> },
-    { path: 'forgotPasswordIns', element: <ForgetPassword /> },
-    { path: 'resetPassword/:token', element: <ResetPasswordForm /> },
-    { path: 'home', element: <HomePage /> },
-    { path: 'age-verification', element: <AgeVerificationPage /> }
+  { path: "login", element: <LoginForm /> },
+  { path: "register", element: <RegisterForm /> },
+  { path: "forgotPassword", element: <ForgetPasswordForm /> },
+  { path: "forgotPasswordIns", element: <ForgetPassword /> },
+  { path: "resetPassword/:token", element: <ResetPasswordForm /> },
+  { path: "home", element: <HomePage /> },
+  { path: "age-verification", element: <AgeVerificationPage /> },
 ];
 
 export const routes: RouteObject[] = [
-    {
-        path: '/',
-        element: <App />,
-        children: [
-            { path: 'alcohols', element: <AlcoholsTable /> },
-            { path: 'alcoholAdd', element: <AlcoholForm /> },
-            { path: 'alcohols/:id', element: <AlcoholDetails /> },
-            { path: 'reviews', element: <ReviewDashboard /> },
-            { path: 'reviewDetails/:id', element: <ReviewDetails /> },
-            { path: 'reviewDetailsAdd/:id', element: <ReviewForm /> },
-            { path: '*', element: <NotFound /> }
-        ]
-    },
-    ...publicRoutes,
-]
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "alcohols", element: <AlcoholsTable /> },
+      { path: "alcoholAdd", element: <AlcoholForm /> },
+      { path: "alcohols/:id", element: <AlcoholDetails /> },
+      { path: "reviews", element: <ReviewDashboard /> },
+      { path: "reviewDetails/:id", element: <ReviewDetails /> },
+      { path: "reviewDetailsAdd/:id", element: <ReviewForm /> },
+      { path: "admin", element: <AdminDashboard /> },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+  ...publicRoutes,
+];
 
 export const router = createBrowserRouter(routes);
